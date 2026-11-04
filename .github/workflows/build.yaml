@@ -369,6 +369,7 @@ jobs:
                  openwrt/target/linux/lantiq/xrx200/base-files/lib/firmware/wasp-image.bin
             fi
           fi
+          if [ "${{ inputs.build_target || 'lantiq-only' }}" != "lantiq-initial" ]; then
           cp firmware/ath_tgt_fw1.fw \
              openwrt/target/linux/lantiq/xrx200/base-files/lib/firmware/netboot.fw
           cp firmware/xhcifw.mem \
@@ -379,7 +380,7 @@ jobs:
              openwrt/target/linux/lantiq/xrx200/base-files/lib/firmware/
           cp firmware/lantiq-vrx200-b.bin \
              openwrt/target/linux/lantiq/xrx200/base-files/lib/firmware/
-
+          fi
       - name: Copy custom config files
         env:
           WIFI_SSID: ${{ secrets.WIFI_SSID }}
